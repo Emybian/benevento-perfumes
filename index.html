@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Benevento Perfumes</title>
+    <link rel="stylesheet" href="estilos.css">
+    <style>
+        body {
+            background-color: #d6c79a;
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+        .menu {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background-color: #8f6b45;
+            padding: 10px;
+            color: white;
+        }
+        .menu-item, .mobile-menu-item {
+            padding: 10px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+            text-decoration: none; /* Evita el subrayado en los enlaces */
+            color: white; /* Color del texto */
+        }
+        .menu-item:hover, .mobile-menu-item:hover {
+            background-color: #a57d5f;
+        }
+        .mobile-menu {
+            display: none;
+            flex-direction: column;
+            position: absolute;
+            background-color: #c4a76b;
+            width: 100%;
+            top: 0;
+            left: 0;
+            z-index: 1;
+        }
+        .menu-icon {
+            cursor: pointer;
+            color: white;
+            font-size: 24px;
+        }
+        @media (max-width: 768px) {
+            .menu {
+                display: none;
+            }
+            .mobile-menu {
+                display: flex;
+            }
+        }
+        #banner-carousel {
+            position: relative;
+            overflow: hidden;
+        }
+        #banner-carousel img {
+            width: 100%;
+            height: auto;
+            display: none;
+        }
+        #banner-carousel img.active {
+            display: block;
+        }
+        main {
+            padding: 20px;
+        }
+        h2 {
+            color: #8f6b45;
+        }
+        .productos-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+        .productos-table th, .productos-table td {
+            border: 1px solid #8f6b45;
+            padding: 10px;
+            text-align: left;
+        }
+        .productos-table th {
+            background-color: #8f6b45;
+            color: white;
+        }
+        footer {
+            background-color: #8f6b45;
+            color: white;
+            padding: 10px;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="menu">
+            <a href="index.html" class="menu-item">Inicio</a>
+            <a href="onemillion.html" class="menu-item">One Million</a>
+            <a href="ladymillion.html" class="menu-item">Lady Million</a>
+            <a href="nuestras_sedes.html" class="menu-item">Nuestras Sedes</a>
+            <a href="contacto.html" class="menu-item">Contacto</a>
+        </div>
+
+        <div class="mobile-menu" id="mobile-menu">
+            <div class="menu-icon" onclick="toggleMobileMenu()">☰ Menú</div>
+            <a href="index.html" class="mobile-menu-item">Inicio</a>
+            <a href="onemillion.html" class="mobile-menu-item">One Million</a>
+            <a href="ladymillion.html" class="mobile-menu-item">Lady Million</a>
+            <a href="nuestras_sedes.html" class="mobile-menu-item">Nuestras Sedes</a>
+            <a href="contacto.html" class="mobile-menu-item">Contacto</a>
+        </div>
+    </header>
+
+    <main>
+        <section id="carousel">
+            <div id="banner-carousel">
+                <img src="img/img2.jpg" alt="One Million" class="active">
+                <img src="img/image.png" alt="Lady Million">
+            </div>
+        </section>
+
+        <section id="productos-table">
+            <h2>Quiénes Somos</h2>
+            <p>En Benevento Perfumes nos dedicamos a ofrecer una experiencia única en el mundo de las fragancias de lujo. Desde nuestra fundación, nos hemos destacado por nuestra pasión por los perfumes exclusivos y la atención al detalle en cada uno de nuestros productos.</p>
+            <h2>Nuestros Productos Destacados</h2>
+            <p>Conozca nuestras fragancias más vendidas: <a href="onemillion.html">One Million</a> y <a href="ladymillion.html">Lady Million</a>.</p>
+
+            <h2>Tabla de Productos</h2>
+            <table class="productos-table">
+                <thead>
+                    <tr>
+                        <th>Nombre del Producto</th>
+                        <th>Descripción</th>
+                        <th>Precio</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>One Million</td>
+                        <td>One Million de Paco Rabanne es una fragancia masculina que combina notas de especias, cuero y ámbar. Esta fragancia es conocida por su intensidad y elegancia, ideal para ocasiones especiales.</td>
+                        <td>S/499</td>
+                    </tr>
+                    <tr>
+                        <td>Lady Million</td>
+                        <td>Lady Million de Paco Rabanne es una fragancia femenina que encarna el glamour y la extravagancia. Con una mezcla cautivadora de notas florales como el neroli, la azucena y el jazmín, combinadas con la calidez del pachulí y el ámbar, esta fragancia es una declaración de estilo y sofisticación.</td>
+                        <td>S/499</td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2024 Benevento Perfumes. Todos los derechos reservados.</p>
+    </footer>
+
+    <script>
+        function toggleMobileMenu() {
+            const menu = document.getElementById('mobile-menu');
+            const items = menu.querySelectorAll('.mobile-menu-item');
+            const isVisible = items[0].style.display === 'block';
+            items.forEach(item => {
+                item.style.display = isVisible ? 'none' : 'block';
+            });
+        }
+
+        let currentBanner = 0;
+        const banners = document.querySelectorAll('#banner-carousel img');
+        setInterval(() => {
+            banners[currentBanner].classList.remove('active');
+            currentBanner = (currentBanner + 1) % banners.length;
+            banners[currentBanner].classList.add('active');
+        }, 3000);
+    </script>
+
+</body>
+</html>

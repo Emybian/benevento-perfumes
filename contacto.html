@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contacto - Benevento Perfumes</title>
+    <link rel="stylesheet" href="estilos.css">
+    <style>
+        /* Estilos para el cuadro flotante */
+        .cuadro-flotante {
+            width: 400px;
+            padding: 20px;
+            background-color: #f9f9f9;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            position: relative; /* Cambiado a relative */
+            margin: 50px auto; /* Centrado en la página */
+            z-index: 100;
+        }
+
+        .cuadro-flotante h2 {
+            margin-top: 0;
+            color: #333;
+        }
+
+        .cuadro-flotante label {
+            display: block;
+            margin-top: 10px;
+            font-weight: bold;
+            color: #555;
+        }
+
+        .cuadro-flotante input, .cuadro-flotante textarea, .cuadro-flotante button {
+            width: 100%;
+            padding: 10px;
+            margin-top: 5px;
+            border-radius: 4px;
+            border: 1px solid #ccc;
+            box-sizing: border-box;
+        }
+
+        .cuadro-flotante button {
+            background-color: #b48d0c;
+            color: white;
+            cursor: pointer;
+            border: none;
+        }
+
+        .cuadro-flotante button:hover {
+            background-color: #b36335;
+        }
+
+        #mensajeConfirmacion {
+            display: none;
+            color: green;
+            margin-top: 20px;
+            text-align: center;
+        }
+
+        body {
+            background-color: #d6c79a;
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+
+        header {
+            background-color: #8f6b45;
+            padding: 10px 0;
+            position: relative; /* Asegura que el menú esté en el flujo del documento */
+            z-index: 200; /* Mayor que el formulario */
+        }
+
+        nav ul {
+            list-style-type: none;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+        }
+
+        nav ul li {
+            margin: 0 15px;
+        }
+
+        nav ul li a {
+            color: white;
+            text-decoration: none;
+            padding: 10px;
+            transition: background-color 0.3s;
+        }
+
+        nav ul li a:hover {
+            background-color: #a57d5f;
+        }
+
+        .menu-icon {
+            cursor: pointer;
+            color: white;
+            font-size: 24px;
+            display: none;
+        }
+
+        .mobile-menu {
+            display: none;
+            flex-direction: column;
+            position: absolute;
+            background-color: #c4a76b;
+            width: 100%;
+            top: 50px; /* Ajuste para que no se superponga con el encabezado */
+            left: 0;
+            z-index: 150; /* Menor que el encabezado pero mayor que el formulario */
+        }
+
+        .mobile-menu-item {
+            padding: 15px;
+            color: white;
+            text-align: center;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .mobile-menu-item:hover {
+            background-color: #a57d5f;
+        }
+
+        @media (max-width: 768px) {
+            nav ul {
+                display: none;
+            }
+            .menu-icon {
+                display: block;
+            }
+            .mobile-menu {
+                display: flex;
+            }
+        }
+
+        footer {
+            background-color: #8f6b45;
+            color: white;
+            padding: 10px;
+            text-align: center;
+        }
+    </style>
+    <script>
+        function mostrarConfirmacion() {
+            document.getElementById('mensajeConfirmacion').style.display = 'block';
+        }
+
+        function toggleMobileMenu() {
+            const menu = document.getElementById('mobile-menu');
+            const items = menu.querySelectorAll('.mobile-menu-item');
+            const isVisible = items[0].style.display === 'block';
+            items.forEach(item => {
+                item.style.display = isVisible ? 'none' : 'block';
+            });
+        }
+    </script>
+</head>
+<body>
+    <header>
+        <div class="menu-icon" onclick="toggleMobileMenu()">☰ Menú</div>
+        <nav>
+            <ul>
+                <li><a href="index.html">Inicio</a></li>
+                <li><a href="onemillion.html">One Million</a></li>
+                <li><a href="ladymillion.html">Lady Million</a></li>
+                <li><a href="nuestras_sedes.html">Nuestras Sedes</a></li>
+                <li><a href="contacto.html">Contacto</a></li>
+            </ul>
+        </nav>
+        <div class="mobile-menu" id="mobile-menu">
+            <a href="index.html" class="mobile-menu-item">Inicio</a>
+            <a href="onemillion.html" class="mobile-menu-item">One Million</a>
+            <a href="ladymillion.html" class="mobile-menu-item">Lady Million</a>
+            <a href="nuestras_sedes.html" class="mobile-menu-item">Nuestras Sedes</a>
+            <a href="contacto.html" class="mobile-menu-item">Contacto</a>
+        </div>
+    </header>
+
+    <main>
+        <section id="contacto">
+            <div class="cuadro-flotante">
+                <h2>Formulario de Contacto</h2>
+                <form action="enviar_contacto.php" method="post" onsubmit="mostrarConfirmacion(); return false;">
+                    <label for="nombre">Nombre Completo:</label>
+                    <input type="text" id="nombre" name="nombre" required>
+
+                    <label for="email">Correo Electrónico:</label>
+                    <input type="email" id="email" name="email" required>
+
+                    <label for="asunto">Asunto:</label>
+                    <input type="text" id="asunto" name="asunto" required>
+
+                    <label for="mensaje">Mensaje:</label>
+                    <textarea id="mensaje" name="mensaje" rows="5" required></textarea>
+
+                    <button type="submit">Enviar Mensaje</button>
+                </form>
+                <p id="mensajeConfirmacion">
+                    Su mensaje ha sido enviado con éxito. Nos pondremos en contacto con usted a la brevedad.
+                </p>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="footer-bottom">
+            <p>&copy; 2024 Benevento Perfumes. Todos los derechos reservados.</p>
+        </div>
+    </footer>
+</body>
+</html>
